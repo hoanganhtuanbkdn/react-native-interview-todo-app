@@ -20,7 +20,7 @@ export  const List = ({navigation}: any) => {
           <TouchableOpacity onPress={() => onDetail(task)}>
             <Text>Title: {task.title}</Text>
             <Text>Description: {task.description}</Text>
-            <Text>Completed: {task.completed ? 'complete': 'incomplete'}</Text>
+            <Text style={{  color: task?.completed ? 'green': 'red'}}>{task.completed ? 'Complete': 'Incomplete'}</Text>
           </TouchableOpacity>
         ))
       }
