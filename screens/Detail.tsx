@@ -4,7 +4,7 @@ import {useTaskStore} from '../store/TaskStore'
 import {useEffect, useState} from 'react'
 
 export  const Detail = ({route, navigation}: any) => {
-    const changeStatus = useTaskStore((state) => state.changeStatus)
+    const {changeStatus, deleteTask} = useTaskStore((state) => state)
   const { detail = {} } = route.params
 
     const [data, setData] = useState(detail)
@@ -21,6 +21,11 @@ export  const Detail = ({route, navigation}: any) => {
         completed:!data?.completed 
     })
   }
+
+  const onDelete = () => {
+    deleteTask(detail.id);
+    navigation.goBack()
+  }
   return (
     <View style={styles.container}>
           <View>
@@ -28,6 +33,7 @@ export  const Detail = ({route, navigation}: any) => {
             <Text>{data?.description}</Text>
             <Text style={{  color: data?.completed ? 'green': 'red'}}>{data?.completed ? 'complete': 'incomplete'}</Text>
             <Button title={data?.completed ? 'Make Incomplete': 'Make Complete'} onPress={onChangeStatus}/>
+            <Button title={'Delete'} onPress={onDelete}/>
           </View>
     </View>
   );
